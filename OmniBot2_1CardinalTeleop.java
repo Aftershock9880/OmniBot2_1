@@ -40,12 +40,11 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
 
         double robotDir  = robot.gyro.getRotationFraction();
 
-
         // movement code, Gamepad 1 controls movement with left stick and turning with right stick
-        Flpower = cos(joyTheta) * joyRadius;
-        Frpower = cos(joyTheta) * joyRadius;
-        Blpower = sin(joyTheta) * joyRadius;
-        Brpower = sin(joyTheta) * joyRadius;
+        Flpower = cos(joyTheta + robotDir) * joyRadius;
+        Frpower = sin(joyTheta + robotDir) * joyRadius;
+        Blpower = sin(joyTheta + robotDir) * joyRadius;
+        Brpower = cos(joyTheta + robotDir) * joyRadius;
 
 		robot.motorFl.setPower(Flpower);
 		robot.motorFr.setPower(Frpower);
