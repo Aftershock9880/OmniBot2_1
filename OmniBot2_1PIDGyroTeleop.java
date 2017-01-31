@@ -8,7 +8,7 @@ import static com.qualcomm.robotcore.util.Range.clip;
 
 @TeleOp(name = "OmniBot Gyro Teleop", group = "OmniBot")
 //@Disabled
-public class OmniBot2_1GyroTeleop extends OpMode {
+public class OmniBot2_1PIDGyroTeleop extends OpMode {
 
     private OmniBot2_1Hardware robot = new OmniBot2_1Hardware();
 
