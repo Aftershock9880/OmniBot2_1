@@ -17,12 +17,18 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
 
 	private double powerDivider = 1; //Divide power by this much
 
-    double Flpower;
-    double Frpower;
-    double Blpower;
-    double Brpower;
+    private double Flpower;
+    private double Frpower;
+    private double Blpower;
+    private double Brpower;
 
-	@Override
+    private double joyX = 0;
+    private double joyY = 0;
+    private double joyTheta = 0;
+    private double joyRadius = 0;
+    private double robotDir = 0;
+
+    @Override
 	public void init() {
         robot.init(hardwareMap);
 
@@ -33,14 +39,14 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
 
 	@Override
 	public void loop() {
-        double joyX = -gamepad1.left_stick_x;
-        double joyY = -gamepad1.left_stick_y;
-        double joyTheta  = atan2(joyY, joyX);
-        double joyRadius = sqrt((joyX*joyX) + (joyY*joyY));
+        joyX = -gamepad1.left_stick_x;
+        joyY = -gamepad1.left_stick_y;
+        joyTheta  = atan2(joyY, joyX);
+        joyRadius = sqrt((joyX*joyX) + (joyY*joyY));
 
-        double robotDir  = robot.gyro.getRotationFraction() + 45;
+        robotDir  = robot.gyro.getRotationFraction() + 45;
 
-        // movement code, Gamepad 1 controls movement with left stick and turning with right stick
+        // movement code, Gamepad 1 controls movement with left stick and eventually turning with right stick
         Flpower =  cos(joyTheta + robotDir) * joyRadius;
         Frpower = -sin(joyTheta + robotDir) * joyRadius;
         Blpower = -sin(joyTheta + robotDir) * joyRadius;
