@@ -9,7 +9,7 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 
-@TeleOp(name = "OmniBot Teleop", group = "OmniBot")
+@TeleOp(name = "OmniBot 2.1 Cardinal Teleop", group = "OmniBot 2.1")
 //@Disabled
 public class OmniBot2_1CardinalTeleop extends OpMode {
 
@@ -35,7 +35,10 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
     }
 
     @Override
-    public void start() {}
+    public void start() {
+        robot.gyro.calibrate();
+
+    }
 
 	@Override
 	public void loop() {
@@ -44,13 +47,13 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
         joyTheta  = atan2(joyY, joyX);
         joyRadius = sqrt((joyX*joyX) + (joyY*joyY));
 
-        robotDir  = robot.gyro.getRotationFraction() + 45;
+        robotDir  = -Math.toRadians(robot.gyro.getHeading() + 45);
 
         // movement code, Gamepad 1 controls movement with left stick and eventually turning with right stick
-        Flpower =  cos(joyTheta + robotDir) * joyRadius;
-        Frpower = -sin(joyTheta + robotDir) * joyRadius;
-        Blpower = -sin(joyTheta + robotDir) * joyRadius;
-        Brpower =  cos(joyTheta + robotDir) * joyRadius;
+        Flpower =  cos(robotDir + joyTheta) * joyRadius + clip( gamepad1.right_stick_x, -0.7, 0.7);
+        Frpower = -sin(robotDir + joyTheta) * joyRadius + clip(-gamepad1.right_stick_x, -0.7, 0.7);
+        Blpower = -sin(robotDir + joyTheta) * joyRadius + clip( gamepad1.right_stick_x, -0.7, 0.7);
+        Brpower =  cos(robotDir + joyTheta) * joyRadius + clip(-gamepad1.right_stick_x, -0.7, 0.7);
 
 		robot.motorFl.setPower(Flpower);
 		robot.motorFr.setPower(Frpower);
@@ -62,6 +65,6 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
 		telemetry.addData("stick Y: ", -gamepad1.left_stick_y);
         telemetry.addData("stick Theta: ",  joyTheta );
 		telemetry.addData("stick Radius: ", joyRadius);
-        telemetry.addData("Robot direction: ", robot.gyro.getRotationFraction());
+        telemetry.addData("Robot direction: ", robot.gyro.getHeading() + 45);
 	}
 }
