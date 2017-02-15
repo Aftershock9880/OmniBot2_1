@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "OmniBot Autonomous", group = "OmniBot")
+@Autonomous(name = "OmniBot 2.1 Autonomous", group = "OmniBot 2.1")
 //@Disabled
 public class OmniBot2_1BasicAutonomous extends LinearOpMode {
 

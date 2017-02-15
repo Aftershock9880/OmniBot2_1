@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import static com.qualcomm.robotcore.util.Range.clip;
 
-@TeleOp(name = "OmniBot Gyro Teleop", group = "OmniBot")
+@TeleOp(name = "OmniBot 2.1 Gyro Teleop", group = "OmniBot 2.1")
 //@Disabled
 public class OmniBot2_1PIDGyroTeleop extends OpMode {
 

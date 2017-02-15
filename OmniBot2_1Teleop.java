@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import static com.qualcomm.robotcore.util.Range.clip;
 
-@TeleOp(name = "OmniBot Teleop", group = "OmniBot")
+@TeleOp(name = "OmniBot 2.1 Teleop", group = "OmniBot 2.1")
 //@Disabled
 public class OmniBot2_1Teleop extends OpMode {
 
