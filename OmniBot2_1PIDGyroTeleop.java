@@ -15,7 +15,7 @@ public class OmniBot2_1PIDGyroTeleop extends OpMode {
 	private double powerDivider = 1; //Divide power by this much
 
     int direction = 0;
-    double lastError = 0;
+    double lastP = 0;
 
     double Flpower;
     double Frpower;
@@ -23,11 +23,11 @@ public class OmniBot2_1PIDGyroTeleop extends OpMode {
     double Brpower;
 
     double kp = 1/600;
-    //double ki = 1/600;
+    double ki = 1/600;
     double kd = 1/600;
 
     double p = 0;
-    //double i = 0;
+    double i = 0;
     double d = 0;
 
     double finalPD = 0;
@@ -73,10 +73,10 @@ public class OmniBot2_1PIDGyroTeleop extends OpMode {
         }
 
         p = robot.gyro.getHeading() - direction;
-        //i =+ p;
-        d = p - lastError;
-        lastError = p;
-        finalPD = p * kp + d * kd;
+        i =+ p;
+        d = p - lastP;
+        lastP = p;
+        finalPD = p * kp + /*i * ki +*/ d * kd;
 
         Flpower =+ finalPD;
         Frpower =+ -finalPD;
@@ -98,7 +98,9 @@ public class OmniBot2_1PIDGyroTeleop extends OpMode {
         telemetry.addData("right stick Y: ", -gamepad1.right_stick_y);
 		telemetry.addData("power divider: ", powerDivider);
         telemetry.addData("gyro heading: ", robot.gyro.getHeading());
-        telemetry.addData(": ", 1);
+        telemetry.addData("Proportional: ", p);
+        telemetry.addData("Integral: ", i);
+        telemetry.addData("Derivative: ", d);
         telemetry.addData("PD loop addition: ", finalPD);
 	}
 }
