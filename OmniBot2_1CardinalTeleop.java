@@ -60,6 +60,14 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
 		robot.motorBl.setPower(Blpower);
 		robot.motorBr.setPower(Brpower);
 
+        if (gamepad1.left_bumper) {
+            robotDir =+ 0.01;
+        }
+
+        if (gamepad1.right_bumper) {
+            robotDir =- 0.01;
+        }
+
 		//Send telemetry data back to driver station.
 		telemetry.addData("stick X: ", -gamepad1.left_stick_x);
 		telemetry.addData("stick Y: ", -gamepad1.left_stick_y);
