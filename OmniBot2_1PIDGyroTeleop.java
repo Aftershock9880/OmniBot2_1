@@ -58,15 +58,10 @@ public class OmniBot2_1PIDGyroTeleop extends OpMode {
 			powerDivider = 1;
 		}
 
-        Flpower =+ -gamepad1.left_stick_y +  gamepad1.left_stick_x +  gamepad1.right_stick_x;
-        Frpower =+ -gamepad1.left_stick_y + -gamepad1.left_stick_x + -gamepad1.right_stick_x;
-        Blpower =+ -gamepad1.left_stick_y + -gamepad1.left_stick_x +  gamepad1.right_stick_x;
-        Brpower =+ -gamepad1.left_stick_y +  gamepad1.left_stick_x + -gamepad1.right_stick_x;
-
-        Flpower = clip(Flpower, -0.7, 0.7);
-        Frpower = clip(Frpower, -0.7, 0.7);
-        Blpower = clip(Blpower, -0.7, 0.7);
-        Brpower = clip(Brpower, -0.7, 0.7);
+        Flpower = -gamepad1.left_stick_y +  gamepad1.left_stick_x +  gamepad1.right_stick_x;
+        Frpower = -gamepad1.left_stick_y + -gamepad1.left_stick_x + -gamepad1.right_stick_x;
+        Blpower = -gamepad1.left_stick_y + -gamepad1.left_stick_x +  gamepad1.right_stick_x;
+        Brpower = -gamepad1.left_stick_y +  gamepad1.left_stick_x + -gamepad1.right_stick_x;
 
         if (gamepad1.right_stick_x > 0.001 || gamepad1.right_stick_x < -0.001) {
                 direction = robot.gyro.getHeading();
