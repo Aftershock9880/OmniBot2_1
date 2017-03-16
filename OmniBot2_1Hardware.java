@@ -21,20 +21,24 @@ import com.qualcomm.robotcore.util.Hardware;
  * Back Left drive motor:     "motor_3"
  * Back Right drive motor:    "motor_4"
  *
+ * Lift motor:                "motor_lift"
+ *
  * Gyro sensor                "gyro_1"
  */
 
 public class OmniBot2_1Hardware {
     //Public OpMode members
-    public DcMotor motorFl    = null;
-    public DcMotor motorFr    = null;
-    public DcMotor motorBl    = null;
-    public DcMotor motorBr    = null;
+    public DcMotor motorFl   = null;
+    public DcMotor motorFr   = null;
+    public DcMotor motorBl   = null;
+    public DcMotor motorBr   = null;
 
-    public GyroSensor gyro    = null;
+    public DcMotor motorLift = null;
+
+    public GyroSensor gyro   = null;
 
     //Local OpMode members
-    HardwareMap hwMap         = null;
+    HardwareMap hwMap        = null;
 
     //Constructor
     OmniBot2_1Hardware() {}
@@ -48,6 +52,8 @@ public class OmniBot2_1Hardware {
         motorFr =   hwMap.dcMotor.get("motor_2");  motorFr.setDirection(DcMotorSimple.Direction.REVERSE);
         motorBl =   hwMap.dcMotor.get("motor_3");
         motorBr =   hwMap.dcMotor.get("motor_4");  motorBr.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        motorLift = hwMap.dcMotor.get("motor_lift");
 
         gyro =      hwMap.gyroSensor.get("gyro_1");
     }

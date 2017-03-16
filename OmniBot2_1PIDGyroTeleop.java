@@ -87,6 +87,17 @@ public class OmniBot2_1PIDGyroTeleop extends OpMode {
             direction = robot.gyro.getHeading();
         }
 
+        // lift code
+        if (gamepad1.y) {
+            robot.motorLift.setPower(1);
+        }
+        else if (gamepad1.a) {
+            robot.motorLift.setPower(-1);
+        }
+        else {
+            robot.motorLift.setPower(0);
+        }
+
 		//Send telemetry data back to driver station.
 		telemetry.addData("left stick X: ", -gamepad1.left_stick_x);
 		telemetry.addData("left stick Y: ", -gamepad1.left_stick_y);

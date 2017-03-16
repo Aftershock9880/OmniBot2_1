@@ -62,6 +62,17 @@ public class OmniBot2_1Teleop extends OpMode {
 		robot.motorBl.setPower(Blpower /*powerDivider*/);
 		robot.motorBr.setPower(Brpower /*powerDivider*/);
 
+        // lift code
+        if (gamepad1.y) {
+            robot.motorLift.setPower(1);
+        }
+        else if (gamepad1.a) {
+            robot.motorLift.setPower(-1);
+        }
+        else {
+            robot.motorLift.setPower(0);
+        }
+
 		//Send telemetry data back to driver station.
 		telemetry.addData("stick X: ", -gamepad1.left_stick_x);
 		telemetry.addData("stick Y: ", -gamepad1.left_stick_y);

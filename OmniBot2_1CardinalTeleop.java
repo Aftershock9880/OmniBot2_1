@@ -27,6 +27,7 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
     private double joyTheta = 0;
     private double joyRadius = 0;
     private double robotDir = 0;
+    private double DirMod = 0;
 
     @Override
 	public void init() {
@@ -47,7 +48,7 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
         joyTheta  = atan2(joyY, joyX);
         joyRadius = sqrt((joyX*joyX) + (joyY*joyY));
 
-        robotDir  = -Math.toRadians(robot.gyro.getHeading() + 45);
+        robotDir  = -Math.toRadians(robot.gyro.getHeading() + 45) - DirMod;
 
         // movement code, Gamepad 1 controls movement with left stick and eventually turning with right stick
         Flpower =  cos(robotDir + joyTheta) * joyRadius + clip( gamepad1.right_stick_x, -0.7, 0.7);
@@ -61,11 +62,22 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
 		robot.motorBr.setPower(Brpower);
 
         if (gamepad1.left_bumper) {
-            robotDir =+ 0.01;
+            DirMod =+ 0.01;
         }
 
         if (gamepad1.right_bumper) {
-            robotDir =- 0.01;
+            DirMod =- 0.01;
+        }
+
+        // lift code
+        if (gamepad1.y) {
+            robot.motorLift.setPower(1);
+        }
+        else if (gamepad1.a) {
+            robot.motorLift.setPower(-1);
+        }
+        else {
+            robot.motorLift.setPower(0);
         }
 
 		//Send telemetry data back to driver station.
