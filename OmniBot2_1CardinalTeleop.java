@@ -72,20 +72,15 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
         robotDir  = -Math.toRadians(robot.gyro.getHeading() + 45) - DirMod;
 
         // movement code, Gamepad 1 controls movement with left stick and eventually turning with right stick
-        Flpower =  cos(robotDir + joyTheta) * joyRadius + clip( gamepad1.right_stick_x, -0.7, 0.7);
-        Frpower = -sin(robotDir + joyTheta) * joyRadius + clip(-gamepad1.right_stick_x, -0.7, 0.7);
-        Blpower = -sin(robotDir + joyTheta) * joyRadius + clip( gamepad1.right_stick_x, -0.7, 0.7);
-        Brpower =  cos(robotDir + joyTheta) * joyRadius + clip(-gamepad1.right_stick_x, -0.7, 0.7);
+        Flpower =  cos(robotDir + joyTheta) * joyRadius +  gamepad1.right_stick_x * 0.7;
+        Frpower = -sin(robotDir + joyTheta) * joyRadius + -gamepad1.right_stick_x * 0.7;
+        Blpower = -sin(robotDir + joyTheta) * joyRadius +  gamepad1.right_stick_x * 0.7;
+        Brpower =  cos(robotDir + joyTheta) * joyRadius + -gamepad1.right_stick_x * 0.7;
 
-        Flpower = clip(Flpower, 1 - finalPD, 1 + finalPD);
-        Flpower = clip(Flpower, 1 - finalPD, 1 + finalPD);
-        Flpower = clip(Flpower, 1 - finalPD, 1 + finalPD);
-        Flpower = clip(Flpower, 1 - finalPD, 1 + finalPD);
-
-		robot.motorFl.setPower(Flpower);
-		robot.motorFr.setPower(Frpower);
-		robot.motorBl.setPower(Blpower);
-		robot.motorBr.setPower(Brpower);
+		robot.motorFl.setPower(Flpower + finalPD);
+		robot.motorFr.setPower(Frpower - finalPD);
+		robot.motorBl.setPower(Blpower + finalPD);
+		robot.motorBr.setPower(Brpower - finalPD);
 
         if (gamepad1.left_bumper) {
             DirMod =+ 0.01;
