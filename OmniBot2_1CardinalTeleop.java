@@ -8,6 +8,7 @@ import static java.lang.Math.atan2;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
+import static java.lang.Math.toDegrees;
 
 @TeleOp(name = "OmniBot 2.1 Cardinal Teleop", group = "OmniBot 2.1")
 //@Disabled
@@ -29,6 +30,20 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
     private double robotDir = 0;
     private double DirMod = 0;
 
+    double targetDir = 0;
+
+    double lastP = 0;
+
+    double kp = 1/600;
+    double ki = 1/600;
+    double kd = 1/600;
+
+    double p = 0;
+    double i = 0;
+    double d = 0;
+
+    double finalPD = 0;
+
     @Override
 	public void init() {
         robot.init(hardwareMap);
@@ -48,6 +63,12 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
         joyTheta  = atan2(joyY, joyX);
         joyRadius = sqrt((joyX*joyX) + (joyY*joyY));
 
+        p = toDegrees(robotDir) - targetDir;
+        i =+ p;
+        d = p - lastP;
+        lastP = p;
+        finalPD = p * kp + /*i * ki +*/ d * kd;
+
         robotDir  = -Math.toRadians(robot.gyro.getHeading() + 45) - DirMod;
 
         // movement code, Gamepad 1 controls movement with left stick and eventually turning with right stick
@@ -55,6 +76,11 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
         Frpower = -sin(robotDir + joyTheta) * joyRadius + clip(-gamepad1.right_stick_x, -0.7, 0.7);
         Blpower = -sin(robotDir + joyTheta) * joyRadius + clip( gamepad1.right_stick_x, -0.7, 0.7);
         Brpower =  cos(robotDir + joyTheta) * joyRadius + clip(-gamepad1.right_stick_x, -0.7, 0.7);
+
+        Flpower = clip(Flpower, 1 - finalPD, 1 + finalPD);
+        Flpower = clip(Flpower, 1 - finalPD, 1 + finalPD);
+        Flpower = clip(Flpower, 1 - finalPD, 1 + finalPD);
+        Flpower = clip(Flpower, 1 - finalPD, 1 + finalPD);
 
 		robot.motorFl.setPower(Flpower);
 		robot.motorFr.setPower(Frpower);
