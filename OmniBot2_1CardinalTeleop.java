@@ -90,7 +90,7 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
             DirMod =- 0.01;
         }
 
-        // lift code
+        /*/ lift code
         if (gamepad1.y) {
             robot.motorLift.setPower(1);
         }
@@ -99,7 +99,7 @@ public class OmniBot2_1CardinalTeleop extends OpMode {
         }
         else {
             robot.motorLift.setPower(0);
-        }
+        }*/
 
 		//Send telemetry data back to driver station.
 		telemetry.addData("stick X: ", -gamepad1.left_stick_x);

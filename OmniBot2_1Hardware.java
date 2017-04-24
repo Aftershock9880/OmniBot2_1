@@ -33,7 +33,7 @@ public class OmniBot2_1Hardware {
     public DcMotor motorBl   = null;
     public DcMotor motorBr   = null;
 
-    public DcMotor motorLift = null;
+    //public DcMotor motorLift = null;
 
     public GyroSensor gyro   = null;
 
@@ -53,7 +53,7 @@ public class OmniBot2_1Hardware {
         motorBl =   hwMap.dcMotor.get("motor_3");
         motorBr =   hwMap.dcMotor.get("motor_4");  motorBr.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        motorLift = hwMap.dcMotor.get("motor_lift");
+        //motorLift = hwMap.dcMotor.get("motor_lift");
 
         gyro =      hwMap.gyroSensor.get("gyro_1");
     }
